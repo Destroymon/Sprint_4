@@ -16,7 +16,7 @@ class TestOrders:
     def test_click_button_top(self, browser):
         first_question = Question_Program(browser)
         first_question.go_to_site()
-        main = Main_Page(browser)  #
+        main = Main_Page(browser)
         browser.refresh()
         main.click_to_order_top()
 
