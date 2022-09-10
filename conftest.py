@@ -4,7 +4,7 @@ from selenium import webdriver
 
 @pytest.fixture(scope="session")
 def browser():
-    driver = webdriver.Firefox()
-    driver.maximize_window()
-    yield driver
-    driver.quit()
+    driver = webdriver.Firefox()  # Задаем браузер
+    driver.maximize_window()  # Делаем полный экран
+    yield driver  # Возвращаем генератор
+    driver.quit()  # Выходим с браузера :)

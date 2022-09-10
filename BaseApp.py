@@ -2,8 +2,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
 
-class BasePage:  # В классе BasePage определяем базовые методы для работы с WebDriver.
-    # В классе BasePage создаем конструктор, который принимает driver — экземпляр webdriver.
+class BasePage:  # В классе BasePage определяем базовые методы для работы с Драйвера
+
     def __init__(self, driver):
         self.driver = driver
         self.base_url = "https://qa-scooter.praktikum-services.ru"  # Указываем base_url,
@@ -14,4 +14,4 @@ class BasePage:  # В классе BasePage определяем базовые 
 
     def go_to_site(self):
         return self.driver.get(self.base_url)
-    # Метод go_to_site позволяет перейти на указываемую страницу.
+    # Вызываем функцию, переходим на указанную страницу.

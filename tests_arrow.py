@@ -1,11 +1,11 @@
 import allure
 
-from QuestionPage import Question_Program
+from PageObjects import Question_Program
 from selenium.webdriver.common.by import By
 
 
-# Создаем тестовый класс и методы
 class TestProgram:
+
     @allure.title('Тест первого вопроса')
     @allure.feature('First question')
     @allure.story('Проверяем первый вопрос')
@@ -13,13 +13,13 @@ class TestProgram:
         first_question = Question_Program(browser)  # Создаем экземпляр класса first_question
         first_question.go_to_site()  # Запускаем сайт
         browser.execute_script(
-            "window.scrollTo(0, document.body.scrollHeight);")
+            "window.scrollTo(0, document.body.scrollHeight);")  # Создаем скрипт
         first_question.do_first_question()  # Запускаем первый метод на проверку
         label = browser.find_element(By.CSS_SELECTOR,
-                                     "#accordion__panel-0")
-        # считывать текст с label'ов
+                                     "#accordion__panel-0")  # Считываем текст с label'ов
         assert label.text == "Сутки — 400 рублей. Оплата курьеру — наличными или " \
                              "картой."
+
 
     @allure.title('Тест второго вопроса')
     @allure.feature('Second question')
