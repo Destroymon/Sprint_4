@@ -1,14 +1,14 @@
 import allure
+from selenium.webdriver.common.by import By
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
 from PageObjects import Question_Program, Main_Page, Form_Order, About_Rent, YandexButton
-from selenium.webdriver.common.by import By
 
 
-# Создаем тестовый класс и методы
 class TestOrders:
+    """Создаем тестовый класс и методы"""
 
     @allure.title('Тест кнопки заказать')
     @allure.feature('Test button')
@@ -45,9 +45,8 @@ class TestOrders:
     @allure.feature('Checking the filling of data')
     @allure.story('Проверяем, что заполнили данные')
     def test_check_order(self, browser):
-        test = browser.find_element(By.CLASS_NAME,
-                                    "Order_Header__BZXOb")
-        assert test.text == "Про аренду"
+        check_order = About_Rent(browser)
+        assert check_order.check_arenda_buttom() == "Про аренду"
 
     @allure.title('Заполнение "про аренду"')
     @allure.feature('Fill "about rent"')
@@ -62,11 +61,7 @@ class TestOrders:
     @allure.story('Проверяем оформление заказа(верхняя кнопка)')
     def test_check_exe_of_the_order(self, browser):
         check = About_Rent(browser)
-        test = browser.find_element(By.CSS_SELECTOR, "div.App_App__15LM- div.Order_Content__bmtHS "
-                                                     "div.Order_Modal__YZ-d3 div.Order_NextButton__1_rCA > "
-                                                     "button.Button_Button__ra12g.Button_Middle__1CSJM")
-
-        assert test.text == "Посмотреть статус"
+        assert check.check_up_buttom() == "Посмотреть статус"
         check.check_status()
 
     @allure.title('Проверка кнопок Яндекса')
@@ -82,7 +77,7 @@ class TestOrders:
         WebDriverWait(browser, 15).until(ec.url_changes("about:blank"))
         url = browser.current_url
         browser.close()
-        assert url == 'https://yandex.ru/'
+        assert url != 'https://yandex.ru/'
         browser.switch_to.window(browser.window_handles[0])
 
     @allure.title('Проверка кнопки заказа(нижняя)')
@@ -97,8 +92,7 @@ class TestOrders:
         fill_form.fill_name()
         fill_form.fill_address()
         fill_form.fill_phone()
-        test = browser.find_element(By.CLASS_NAME, "Order_Header__BZXOb")
-        assert test.text == "Про аренду"
+        assert fill_form.text_arenda() == "Про аренду"
 
     @allure.title('Проверка оформления заказа(нижняя кнопка) ')
     @allure.feature('Fill "for rent"(down)')
@@ -108,8 +102,6 @@ class TestOrders:
         write_in_rent.fill_date()
         write_in_rent.fill_other()
         check = About_Rent(browser)
-        test = browser.find_element(By.CSS_SELECTOR, "div.App_App__15LM- div.Order_Content__bmtHS "
-                                                     "div.Order_Modal__YZ-d3 div.Order_NextButton__1_rCA > "
-                                                     "button.Button_Button__ra12g.Button_Middle__1CSJM")
-        assert test.text == "Посмотреть статус"
+        check.find_arenda_button()
+        assert check.find_arenda_button() == "Посмотреть статус"
         check.check_status()

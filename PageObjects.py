@@ -50,7 +50,7 @@ class FireFoxLocators:
                                                           "div.react-datepicker__week:nth-child(3) > "
                                                           "div.react-datepicker__day.react-datepicker__day--018.react"
                                                           "-datepicker__day--weekend:nth-child(7)")
-                                                                # Подтверждение# даты в datepicker
+    # Подтверждение# даты в datepicker
     LOCATOR_RENTAL_PERIOD_BUTTON = (
         By.XPATH, "//div[@class='Dropdown-control']")  # Кнопка выбора периода времени катания
     LOCATOR_RENTAL_PERIOD_CHOICE = (By.CSS_SELECTOR, "div.Dropdown-option:nth-child(1)")  # Выбираем период времени
@@ -72,6 +72,19 @@ class FireFoxLocators:
     # Кнопка проверить статус
     LOCATOR_YANDEX_BUTTON = (By.CLASS_NAME, "Header_LogoYandex__3TSOI")  # Кнопка "Яндекс"
     LOCATOR_SCOOTER_BUTTON = (By.CLASS_NAME, "Header_LogoScooter__3lsAR")  # Кнопка "Самокаты"
+    LOCATOR_SHOW_STATUS = (By.CSS_SELECTOR, "div.App_App__15LM- div.Order_Content__bmtHS "
+                                            "div.Order_Modal__YZ-d3 div.Order_NextButton__1_rCA > "
+                                            "button.Button_Button__ra12g.Button_Middle__1CSJM")
+    LOCATOR_UP_BOTTOM = (By.CSS_SELECTOR, "div.App_App__15LM- div.Order_Content__bmtHS "
+                                          "div.Order_Modal__YZ-d3 div.Order_NextButton__1_rCA > "
+                                          "button.Button_Button__ra12g.Button_Middle__1CSJM")
+
+    LOCATOR_ABOUT_ARENDA = (By.CLASS_NAME,
+                            "Order_Header__BZXOb")
+
+    LOCATOR_DOWN_BUTTOM = (By.XPATH, "//button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']")
+
+    LOCATOR_TEXT_ARENDA = (By.CLASS_NAME, "Order_Header__BZXOb")
 
 
 # Создаем класс Question_Program, наследуется от BasePage.
@@ -110,7 +123,8 @@ class Main_Page(BasePage):
     def click_to_order_down(self):
         self.driverwait(FireFoxLocators.LOCATOR_DOWN_ORDER_BUTTON).click()
 
-
+    def search_down_bottom(self):
+        self.driverwait(FireFoxLocators.LOCATOR_DOWN_BUTTOM)
 
 
 class Form_Order(BasePage):
@@ -129,6 +143,10 @@ class Form_Order(BasePage):
     def fill_phone(self):
         self.driverwait(FireFoxLocators.LOCATOR_PHONE_FORM).send_keys('89612653265')
         self.driverwait(FireFoxLocators.LOCATOR_CONTINUE_BUTTON).click()
+
+    def text_arenda(self):
+        arenda = self.driverwait(FireFoxLocators.LOCATOR_TEXT_ARENDA)
+        return arenda.text
 
 
 # Класс About_Rent создан для окна "Про Аренду".
@@ -150,6 +168,18 @@ class About_Rent(BasePage):
     # В check_status нажимаем на кнопку "проверить статус".
     def check_status(self):
         self.driverwait(FireFoxLocators.LOCATOR_CHECK_STATUS).click()
+
+    def find_arenda_button(self):
+        arenda_text = self.driverwait(FireFoxLocators.LOCATOR_CHECK_STATUS)
+        return arenda_text.text
+
+    def check_up_buttom(self):
+        up_buttom = self.driverwait(FireFoxLocators.LOCATOR_UP_BOTTOM)
+        return up_buttom.text
+
+    def check_arenda_buttom(self):
+        arenda_buttom = self.driverwait(FireFoxLocators.LOCATOR_ABOUT_ARENDA)
+        return arenda_buttom.text
 
 
 # Класс YandexButton создан для кнопок "Яндекс" и "Самокаты".
